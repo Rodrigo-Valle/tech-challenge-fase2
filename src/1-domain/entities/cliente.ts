@@ -1,6 +1,4 @@
-import { Email } from "../value-objects";
-import { CPF } from "../value-objects/cpf";
-import { Id } from "../value-objects/id";
+import { Id, Email, CPF } from "../value-objects";
 
 export class Cliente {
 	id: Id;
