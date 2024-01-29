@@ -10,7 +10,7 @@ const makeNomeWith256Characters = () => {
 
 describe("Cliente Teste", () => {
 	test("Deve criar um Cliente", () => {
-		const cliente = Cliente.new("João", "joao@email.com", "12345678901");
+		const cliente = Cliente.new({ nome: "João", email: "joao@email.com", cpf: "12345678901" });
 
 		expect(cliente).toBeTruthy();
 		expect(cliente.getId()).toBeTruthy();
@@ -22,7 +22,9 @@ describe("Cliente Teste", () => {
 	test.each(["A", "João 1", makeNomeWith256Characters()])(
 		"Deve lançar exceção ao criar um Cliente com nome inválido",
 		(nome) => {
-			expect(() => Cliente.new(nome, "joao@email.com", "12345678901")).toThrow(`Nome informado é inválido: ${nome}`);
+			expect(() => Cliente.new({ nome, email: "joao@email.com", cpf: "12345678901" })).toThrow(
+				`Nome informado é inválido: ${nome}`
+			);
 		}
 	);
 });

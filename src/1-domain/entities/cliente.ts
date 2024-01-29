@@ -13,10 +13,10 @@ export class Cliente {
 		this.cpf = CPF.new(cpf);
 	}
 
-	static new(nome: string, email: string, cpf: string): Cliente {
-		const nomeIsValid = Cliente.validateNome(nome);
-		if (!nomeIsValid) throw new Error(`Nome informado é inválido: ${nome}`);
-		return new Cliente(nome, email, cpf);
+	static new(params: NewCliente): Cliente {
+		const nomeIsValid = Cliente.validateNome(params.nome);
+		if (!nomeIsValid) throw new Error(`Nome informado é inválido: ${params.nome}`);
+		return new Cliente(params.nome, params.email, params.cpf);
 	}
 
 	static validateNome(nome: string): boolean {
@@ -42,4 +42,10 @@ export class Cliente {
 	getCpf(): string {
 		return this.cpf.getValue();
 	}
+}
+
+interface NewCliente {
+	nome: string;
+	email: string;
+	cpf: string;
 }
