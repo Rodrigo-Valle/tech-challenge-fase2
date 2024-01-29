@@ -4,6 +4,7 @@ describe("Email value object", () => {
 	test("Deve criar um Email", () => {
 		const email = Email.new("email@provedor.com");
 
+		expect(email).toBeInstanceOf(Email);
 		expect(email.getValue()).toBe("email@provedor.com");
 	});
 

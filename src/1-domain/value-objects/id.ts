@@ -12,6 +12,10 @@ export class Id {
 		return new Id(uuid);
 	}
 
+	static restore(uuid: string) {
+		return new Id(uuid);
+	}
+
 	getValue(): string {
 		return this.value;
 	}

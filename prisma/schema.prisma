@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id    String @id(map: "cliente_pk") @unique
+  nome  String
+  email String
+  cpf   String @unique
+
+  @@map("cliente")
+}

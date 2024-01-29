@@ -4,6 +4,7 @@ describe("CPF value object", () => {
 	test("Deve criar um CPF", () => {
 		const cpf = CPF.new("12345678901");
 
+		expect(cpf).toBeInstanceOf(CPF);
 		expect(cpf.getValue()).toBe("12345678901");
 	});
 
