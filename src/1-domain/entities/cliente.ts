@@ -1,4 +1,4 @@
-import { Id, Email, CPF } from "../value-objects";
+import { CPF, Email, Id } from "../value-objects";
 
 export class Cliente {
 	private id: Id;
@@ -14,11 +14,12 @@ export class Cliente {
 	}
 
 	static new(params: NewCliente): Cliente {
-		const nomeIsValid = Cliente.validateNome(params.nome);
+		const sanitizedValue = params.nome.trim();
+		const nomeIsValid = Cliente.validateNome(sanitizedValue);
 		if (!nomeIsValid) throw new Error(`Nome informado é inválido: ${params.nome}`);
 		return new Cliente({
 			id: Id.new(),
-			nome: params.nome,
+			nome: sanitizedValue,
 			email: Email.new(params.email),
 			cpf: CPF.new(params.cpf)
 		});

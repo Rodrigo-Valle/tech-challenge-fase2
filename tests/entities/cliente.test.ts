@@ -19,6 +19,16 @@ describe("Cliente Teste", () => {
 		expect(cliente.getCpf()).toBe("12345678901");
 	});
 
+	test("Deve criar um Cliente com nome sanitizado", () => {
+		const cliente = Cliente.new({ nome: "  João  ", email: "joao@email.com", cpf: "12345678901" });
+
+		expect(cliente).toBeInstanceOf(Cliente);
+		expect(cliente.getId()).toBeTruthy();
+		expect(cliente.getNome()).toBe("João");
+		expect(cliente.getEmail()).toBe("joao@email.com");
+		expect(cliente.getCpf()).toBe("12345678901");
+	});
+
 	test("Deve rehidratar um Cliente", () => {
 		const cliente = Cliente.restore({ id: "uuid", nome: "João", email: "joao@email.com", cpf: "12345678901" });
 

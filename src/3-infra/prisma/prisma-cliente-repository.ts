@@ -1,6 +1,6 @@
-import { ClienteRepository } from "@/1-domain/repositories";
-import { PrismaBaseRepository } from "./base.repository";
 import { Cliente } from "@/1-domain/entities";
+import { ClienteRepository } from "@/1-domain/repositories";
+import { PrismaBaseRepository } from "./prisma-base-repository";
 
 export class PrismaClienteRepository extends PrismaBaseRepository implements ClienteRepository {
 	async save(cliente: Cliente): Promise<void> {

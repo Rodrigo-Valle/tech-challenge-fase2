@@ -6,9 +6,10 @@ export class CPF {
 	}
 
 	static new(value: string) {
-		const isValid = CPF.validateCpf(value);
+		const sanitizedValue = value.trim();
+		const isValid = CPF.validateCpf(sanitizedValue);
 		if (!isValid) throw new Error(`CPF informado é inválido: ${value}`);
-		return new CPF(value);
+		return new CPF(sanitizedValue);
 	}
 
 	getValue() {

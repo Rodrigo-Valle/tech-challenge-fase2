@@ -6,9 +6,10 @@ export class Email {
 	}
 
 	static new(value: string) {
-		const isValid = Email.validateEmail(value);
+		const sanitizedValue = value.trim().toLowerCase();
+		const isValid = Email.validateEmail(sanitizedValue);
 		if (!isValid) throw new Error(`Email informado é inválido: ${value}`);
-		return new Email(value);
+		return new Email(sanitizedValue);
 	}
 
 	getValue() {

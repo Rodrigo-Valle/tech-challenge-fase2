@@ -1,4 +1,5 @@
 import { Cliente } from "@/1-domain/entities/cliente";
+import { AlreadyExistsError } from "@/1-domain/exception";
 import { ClienteRepository } from "@/1-domain/repositories";
 import { Usecase } from "../contracts";
 
@@ -15,7 +16,7 @@ export class CadastrarClienteUsecase implements Usecase<CadastrarClienteInput, C
 
 	async execute(input: CadastrarClienteInput): Promise<CadastrarClienteOutput> {
 		const clienteAlreadyExists = await this.clienteRepository.findByCpf(input.cpf);
-		if (clienteAlreadyExists) throw new Error("Cliente já cadastrado");
+		if (clienteAlreadyExists) throw new AlreadyExistsError("Cliente já cadastrado");
 		const cliente = Cliente.new({ ...input });
 		await this.clienteRepository.save(cliente);
 		return cliente;
