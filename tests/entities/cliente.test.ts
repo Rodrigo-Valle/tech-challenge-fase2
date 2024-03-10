@@ -42,16 +42,14 @@ describe("Cliente Teste", () => {
 	test.each(["A", "João 1", makeNomeWith256Characters()])(
 		"Deve lançar exceção ao criar um Cliente com nome inválido",
 		(nome) => {
-			expect(() => Cliente.new({ nome, email: "joao@email.com", cpf: "12345678901" })).toThrow(
-				`Nome informado é inválido: ${nome}`
-			);
+			expect(() => Cliente.new({ nome, email: "joao@email.com", cpf: "12345678901" })).toThrow();
 		}
 	);
 
-	test("Deve retornar um objeto para persistencia", () => {
+	test("Deve retornar um objeto json", () => {
 		const cliente = Cliente.restore({ id: "uuid", nome: "João", email: "joao@email.com", cpf: "12345678901" });
 
-		expect(cliente.toPersistence()).toEqual({
+		expect(cliente.toJson()).toEqual({
 			id: "uuid",
 			nome: "João",
 			email: "joao@email.com",

@@ -1,5 +1,4 @@
 import { HttpRequest, HttpResponse, HttpServer } from "@/2-application/contracts";
-import { RestPresenter } from "@/3-infra/presenters";
 import { RestControllerFactory } from "@/4-main/factories/controllers";
 
 export class ClienteRouter {
@@ -14,9 +13,13 @@ export class ClienteRouter {
 	async cadastrarCliente(params: HttpRequest): Promise<HttpResponse> {
 		const controller = RestControllerFactory.makeClienteController();
 		const result = await controller.cadastrarCliente(params.body);
-		if (result.success) {
-			return RestPresenter.created(result.data);
-		}
-		return RestPresenter.error(result.error, result.message);
+		return {
+			statusCode: result.statusCode,
+			body: {
+				status: result.success ? "sucesso" : "erro",
+				message: result.message ?? undefined,
+				data: result.data ?? undefined
+			}
+		};
 	}
 }

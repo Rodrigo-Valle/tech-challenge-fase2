@@ -1,15 +1,6 @@
-type SuccessOutput = {
-	success: true;
-	data?: any;
+export type RestOutput = {
+	success: boolean;
+	statusCode: number;
+	data?: unknown;
 	message?: string;
-	error?: never;
 };
-
-type FailureOutput = {
-	success: false;
-	error: Error;
-	message: string;
-	data?: never;
-};
-
-export type ControllerOutput = SuccessOutput | FailureOutput;

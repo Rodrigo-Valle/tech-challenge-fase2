@@ -1,3 +1,4 @@
+import { ValidationError } from "../exception";
 import { CPF, Email, Id } from "../value-objects";
 
 export class Cliente {
@@ -16,7 +17,7 @@ export class Cliente {
 	static new(params: NewCliente): Cliente {
 		const sanitizedValue = params.nome.trim();
 		const nomeIsValid = Cliente.validateNome(sanitizedValue);
-		if (!nomeIsValid) throw new Error(`Nome informado é inválido: ${params.nome}`);
+		if (!nomeIsValid) throw new ValidationError(`Nome informado é inválido, nome: ${params.nome}`);
 		return new Cliente({
 			id: Id.new(),
 			nome: sanitizedValue,
@@ -58,7 +59,7 @@ export class Cliente {
 		return this.cpf.getValue();
 	}
 
-	toPersistence() {
+	toJson() {
 		return {
 			id: this.id.getValue(),
 			nome: this.nome,

@@ -1,57 +1,24 @@
-import { AlreadyExistsError } from "@/1-domain/exception";
-import { BadRequestError } from "@/1-domain/exception/bad-request";
-import { ValidationError } from "@/1-domain/exception/validation";
-
-export type RestOutput = {
-	statusCode: number;
-	body: any;
-};
+import { RestOutput } from "@/2-application/contracts";
+import { RestErrorHandler } from "@/3-infra/presenters";
 
 export class RestPresenter {
-	static created = (body: any): RestOutput => {
+	static readonly created = (data: unknown): RestOutput => {
 		return {
 			statusCode: 201,
-			body
+			data,
+			success: true
 		};
 	};
 
-	static ok = (body: any): RestOutput => {
+	static readonly ok = (data: unknown): RestOutput => {
 		return {
 			statusCode: 200,
-			body
+			data: data ?? undefined,
+			success: true
 		};
 	};
 
-	static badRequest = (message: string | string[]): RestOutput => {
-		return {
-			statusCode: 400,
-			body: { message }
-		};
-	};
-
-	static notFound = (): RestOutput => {
-		return {
-			statusCode: 404,
-			body: { message: "Não encontrado" }
-		};
-	};
-
-	static error = (error: Error, message: string): RestOutput => {
-		let statusCode = 500;
-		let data: any;
-		if (error instanceof BadRequestError || error instanceof AlreadyExistsError) {
-			statusCode = 400;
-		}
-		if (error instanceof ValidationError) {
-			statusCode = 400;
-			data = error.getErrors();
-		}
-		return {
-			statusCode,
-			body: {
-				message,
-				data
-			}
-		};
+	static readonly error = (error: unknown): RestOutput => {
+		return RestErrorHandler.handleError(error);
 	};
 }

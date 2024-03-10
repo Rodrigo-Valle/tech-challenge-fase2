@@ -1,3 +1,5 @@
+import { ValidationError } from "../exception";
+
 export class CPF {
 	private readonly value: string;
 
@@ -8,7 +10,7 @@ export class CPF {
 	static new(value: string) {
 		const sanitizedValue = value.trim();
 		const isValid = CPF.validateCpf(sanitizedValue);
-		if (!isValid) throw new Error(`CPF informado é inválido: ${value}`);
+		if (!isValid) throw new ValidationError(`CPF informado é inválido, CPF: ${value}`);
 		return new CPF(sanitizedValue);
 	}
 

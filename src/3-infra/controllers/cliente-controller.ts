@@ -1,29 +1,23 @@
 import { Validator } from "@/2-application/contracts";
-import { ControllerOutput } from "@/2-application/contracts/controller";
+import { RestOutput } from "@/2-application/contracts/controller";
 import { CadastrarClienteUsecase } from "@/2-application/usecases";
 import { CadastrarClienteDTO, cadastrarClienteSchema } from "@/3-infra/adapters/zod";
+import { RestPresenter } from "../presenters";
 
-export class ClienteController {
+export class RestClienteController {
 	constructor(
 		private readonly cadastrarClienteUsecase: CadastrarClienteUsecase,
 		private readonly validator: Validator
 	) {}
 
-	async cadastrarCliente(input: CadastrarClienteDTO): Promise<ControllerOutput> {
+	async cadastrarCliente(input: unknown): Promise<RestOutput> {
 		try {
-			this.validator.validate(input, cadastrarClienteSchema);
-			const result = await this.cadastrarClienteUsecase.execute(input);
-			return {
-				success: true,
-				data: result
-			};
+			const dto = this.validator.validate<CadastrarClienteDTO>(input, cadastrarClienteSchema);
+			const result = await this.cadastrarClienteUsecase.execute(dto);
+			return RestPresenter.created(result.toJson());
 		} catch (error) {
-			const message = `Erro ao cadsatrar cliente: ${error.message}`;
-			return {
-				success: false,
-				error: error,
-				message
-			};
+			console.error(`Erro ao cadastrar cliente: ${error.message}, detalhes: ${error.detail}`);
+			return RestPresenter.error(error);
 		}
 	}
 }

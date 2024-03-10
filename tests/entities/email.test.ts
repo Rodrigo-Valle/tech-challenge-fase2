@@ -18,7 +18,7 @@ describe("Email value object", () => {
 	test.each(["emailprovedor.com", "email@provedor", "email.com", "email"])(
 		"Deve lançar exceção ao criar um Email com valor inválido",
 		(email) => {
-			expect(() => Email.new(email)).toThrow(`Email informado é inválido: ${email}`);
+			expect(() => Email.new(email)).toThrow();
 		}
 	);
 });

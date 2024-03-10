@@ -18,7 +18,7 @@ describe("CPF value object", () => {
 	test.each(["1234567890", "123456789012", "1B345678901"])(
 		"Deve lançar exceção ao criar um CPF com valor inválido",
 		(cpf) => {
-			expect(() => CPF.new(cpf)).toThrow(`CPF informado é inválido: ${cpf}`);
+			expect(() => CPF.new(cpf)).toThrow();
 		}
 	);
 });

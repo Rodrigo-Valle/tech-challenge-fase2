@@ -6,7 +6,7 @@ export class PrismaClienteRepository extends PrismaBaseRepository implements Cli
 	async save(cliente: Cliente): Promise<void> {
 		await this.client.cliente.create({
 			data: {
-				...cliente.toPersistence()
+				...cliente.toJson()
 			}
 		});
 	}

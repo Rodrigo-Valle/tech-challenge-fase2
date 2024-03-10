@@ -3,7 +3,7 @@ import { Validator } from "@/2-application/contracts";
 import { ZodObject, ZodRawShape } from "zod";
 
 export class ZodValidator implements Validator {
-	validate<T extends ZodRawShape>(input: unknown, schema: ZodObject<T>): void {
+	validate<T, S extends ZodRawShape>(input: unknown, schema: ZodObject<S>): T {
 		const result = schema.safeParse(input);
 		if (!result.success) {
 			throw new ValidationError(
@@ -12,5 +12,6 @@ export class ZodValidator implements Validator {
 				})
 			);
 		}
+		return result.data as T;
 	}
 }

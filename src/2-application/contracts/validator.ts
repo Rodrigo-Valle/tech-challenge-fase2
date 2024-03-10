@@ -1,3 +1,3 @@
 export interface Validator {
-	validate: (data: any, schema: any) => void;
+	validate<T>(data: unknown, schema: unknown): T;
 }

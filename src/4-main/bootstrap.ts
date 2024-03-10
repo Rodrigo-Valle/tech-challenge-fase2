@@ -1,5 +1,5 @@
 import { ExpressAdapter } from "./api/express-adapter";
-import { ClienteRouter } from "./api/routes/cliente-router";
+import { initRoutes } from "./api/routes/init-router";
 import { PrismaConnection } from "./drivers/prisma-client";
 
 const port = Number(process.env.PORT ?? 8000);
@@ -8,7 +8,7 @@ const main = async () => {
 	PrismaConnection.getInstance().connect();
 
 	const server = new ExpressAdapter();
-	ClienteRouter.start(server);
+	initRoutes(server);
 	server.listen(port);
 };
 

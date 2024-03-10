@@ -1,3 +1,5 @@
+import { ValidationError } from "../exception";
+
 export class Email {
 	private readonly value: string;
 
@@ -8,7 +10,7 @@ export class Email {
 	static new(value: string) {
 		const sanitizedValue = value.trim().toLowerCase();
 		const isValid = Email.validateEmail(sanitizedValue);
-		if (!isValid) throw new Error(`Email informado é inválido: ${value}`);
+		if (!isValid) throw new ValidationError(`Email informado é inválido, email: ${value}`);
 		return new Email(sanitizedValue);
 	}
 
