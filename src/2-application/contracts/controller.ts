@@ -4,3 +4,9 @@ export type RestOutput = {
 	data?: unknown;
 	message?: string;
 };
+
+export type RestInput = {
+	body: unknown;
+	params: unknown;
+	query: unknown;
+};

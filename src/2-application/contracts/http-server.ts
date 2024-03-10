@@ -8,9 +8,10 @@ export type RestMethod = "get" | "post" | "put" | "delete";
 export type CallbackFunction = (params: HttpRequest) => Promise<HttpResponse>;
 
 export interface HttpRequest {
-	params?: unknown;
-	body?: unknown;
-	query?: unknown;
+	params: unknown;
+	body: unknown;
+	query: unknown;
+	requestId: string;
 }
 
 export interface HttpResponse {

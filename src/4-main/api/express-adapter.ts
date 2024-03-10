@@ -1,6 +1,7 @@
 import { CallbackFunction, HttpServer, RestMethod } from "@/2-application/contracts";
 import cors from "cors";
 import express, { type Request, type Response, type Express } from "express";
+import { generateRequestId } from "./generate-request-id";
 import { swaggerMiddleware } from "./swagger-middleware";
 
 export class ExpressAdapter implements HttpServer {
@@ -15,7 +16,8 @@ export class ExpressAdapter implements HttpServer {
 
 	on(method: RestMethod, url: string, callback: CallbackFunction): void {
 		this.app[method](url, async (request: Request, response: Response) => {
-			const output = await callback({ params: request.params, body: request.body, query: request.query });
+			const requestId = generateRequestId();
+			const output = await callback({ params: request.params, body: request.body, query: request.query, requestId });
 			response.status(output.statusCode).json(output.body);
 		});
 	}
