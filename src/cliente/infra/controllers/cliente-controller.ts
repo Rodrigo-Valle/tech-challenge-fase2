@@ -12,7 +12,7 @@ import { RestPresenter } from "@/shared/infra/presenters";
 export class RestClienteController {
 	constructor(
 		private readonly logger: Log,
-		private readonly usecaseFactories: ClienteUsecasesFactoryInterface,
+		private readonly usecaseFactory: ClienteUsecasesFactoryInterface,
 		private readonly validator: Validator
 	) {}
 
@@ -20,7 +20,7 @@ export class RestClienteController {
 		try {
 			this.logger.info(input, "Nova requisição de cadastro de cliente: ");
 			const dto = this.validator.validate<CadastrarClienteDTO>(input.body, cadastrarClienteSchema);
-			const result = await this.usecaseFactories.makeCadastrarClienteUsecase(this.logger).execute(dto);
+			const result = await this.usecaseFactory.makeCadastrarClienteUsecase(this.logger).execute(dto);
 			return RestPresenter.created(result.toJson());
 		} catch (error) {
 			this.logger.error(`Erro ao cadastrar cliente: ${error.message}, detalhes: ${error.detail}`);
@@ -32,7 +32,7 @@ export class RestClienteController {
 		try {
 			this.logger.info(input, "Nova requisição de busca de cliente por CPF: ");
 			const dto = this.validator.validate<BuscarClientePorCpfDTO>(input.params, buscarClientePorCpfSchema);
-			const result = await this.usecaseFactories.makeBuscarClientePorCpfUsecase(this.logger).execute(dto);
+			const result = await this.usecaseFactory.makeBuscarClientePorCpfUsecase(this.logger).execute(dto);
 			return RestPresenter.ok(result.toJson());
 		} catch (error) {
 			this.logger.error(`Erro ao buscar cliente por CPF: ${error.message}, detalhes: ${error.detail}`);

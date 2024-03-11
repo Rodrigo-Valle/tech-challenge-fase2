@@ -7,7 +7,7 @@ import { CadastrarItemDTO, cadastrarItemSchema } from "../schemas";
 export class RestItemController {
 	constructor(
 		private readonly logger: Log,
-		private readonly usecaseFactories: ItemUsecasesFactoryInterface,
+		private readonly usecaseFactory: ItemUsecasesFactoryInterface,
 		private readonly validator: Validator
 	) {}
 
@@ -15,7 +15,7 @@ export class RestItemController {
 		try {
 			this.logger.info(input, "Nova requisição de cadastro de item: ");
 			const dto = this.validator.validate<CadastrarItemDTO>(input.body, cadastrarItemSchema);
-			const result = await this.usecaseFactories.makeCadastrarItemUsecase(this.logger).execute(dto);
+			const result = await this.usecaseFactory.makeCadastrarItemUsecase(this.logger).execute(dto);
 			return RestPresenter.created(result.toJson());
 		} catch (error) {
 			this.logger.error(`Erro ao cadastrar Item: ${error.message}, detalhes: ${error.detail}`);

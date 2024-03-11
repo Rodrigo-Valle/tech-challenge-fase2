@@ -1,8 +1,8 @@
 import { RestClienteController } from "@/cliente/infra/controllers/cliente-controller";
-import { RestItemController } from "@/item/infra/controllers";
+import { RestCategoriaController, RestItemController } from "@/item/infra/controllers";
 import { PinoLogService } from "@/shared/infra/adapters/pino/pino-log-service";
 import { ZodValidator } from "@/shared/infra/adapters/zod/zod-validator";
-import { ClienteUsecasesFactory, ItemUsecasesFactory } from "../usecases";
+import { CategoriaUsecasesFactory, ClienteUsecasesFactory, ItemUsecasesFactory } from "../usecases";
 
 export class RestControllerFactory {
 	static makeClienteController(requestId: string): RestClienteController {
@@ -17,5 +17,12 @@ export class RestControllerFactory {
 		const itemUsecaseFactories = new ItemUsecasesFactory();
 		const zodValidator = new ZodValidator();
 		return new RestItemController(logger, itemUsecaseFactories, zodValidator);
+	}
+
+	static makeCategoriaController(requestId: string): RestCategoriaController {
+		const logger = new PinoLogService(requestId);
+		const categoriaUsecaseFactory = new CategoriaUsecasesFactory();
+		const zodValidator = new ZodValidator();
+		return new RestCategoriaController(logger, categoriaUsecaseFactory, zodValidator);
 	}
 }

@@ -38,7 +38,7 @@ export class Item {
 	static validateNome(nome: string): string {
 		const sanitizedValue = nome.trim();
 		const nameHasInvalidLenght = sanitizedValue.length < 3 || sanitizedValue.length > 255;
-		if (!nameHasInvalidLenght) throw new ValidationError(`Nome informado é inválido, nome: ${nome}`);
+		if (nameHasInvalidLenght) throw new ValidationError(`Nome informado é inválido, nome: ${nome}`);
 		return sanitizedValue;
 	}
 
