@@ -1,9 +1,11 @@
 import { RestClienteController } from "@/cliente/infra/controllers";
 import { RestControllerFactory } from "@/main/factories/controllers";
-import { HttpRequest, HttpResponse, HttpServer, RestOutput } from "@/shared/contracts";
+import { HttpServer } from "@/shared/contracts";
+import { BaseRouter } from "./base-router";
 
-export class ClienteRouter {
+export class ClienteRouter extends BaseRouter<RestClienteController> {
 	constructor(readonly httpServer: HttpServer) {
+		super();
 		httpServer.on("post", "/cliente", (params) => this.handleRequest(params, "cadastrarCliente"));
 		httpServer.on("get", "/cliente/cpf/:cpf", (params) => this.handleRequest(params, "buscarClientePorCPF"));
 	}
@@ -12,20 +14,7 @@ export class ClienteRouter {
 		return new ClienteRouter(httpServer);
 	}
 
-	private async handleRequest(params: HttpRequest, methodName: keyof RestClienteController): Promise<HttpResponse> {
-		const controller = RestControllerFactory.makeClienteController(params.requestId);
-		const result = await controller[methodName]({ ...params });
-		return this.buildResponse(result);
-	}
-
-	private buildResponse(result: RestOutput): HttpResponse {
-		return {
-			statusCode: result.statusCode,
-			body: {
-				status: result.success ? "sucesso" : "erro",
-				message: result.message ?? undefined,
-				data: result.data ?? undefined
-			}
-		};
+	protected makeController(requestId: string): RestClienteController {
+		return RestControllerFactory.makeClienteController(requestId);
 	}
 }

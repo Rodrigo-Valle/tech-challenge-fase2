@@ -1,5 +1,5 @@
+import { validateStringField } from "@/shared/infra/adapters/zod";
 import { z } from "zod";
-import { validateStringField } from "../helpers/validate-string";
 
 export const buscarClientePorCpfSchema = z.object({
 	cpf: validateStringField({

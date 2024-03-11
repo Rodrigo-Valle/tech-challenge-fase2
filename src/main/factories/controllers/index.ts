@@ -1,1 +1,1 @@
-export * from "./cliente-controller-factory";
+export * from "./controller-factory";

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { validateStringField } from "../helpers/validate-string";
+import { validateStringField } from "../../../shared/infra/adapters/zod/validate-string";
 
 export const cadastrarClienteSchema = z.object({
 	nome: validateStringField({

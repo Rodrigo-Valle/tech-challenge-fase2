@@ -18,8 +18,15 @@
 	"author": "",
 	"license": "ISC",
 	"nodemonConfig": {
-		"ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
-		"watch": ["src"],
+		"ignore": [
+			"**/*.test.ts",
+			"**/*.spec.ts",
+			".git",
+			"node_modules"
+		],
+		"watch": [
+			"src"
+		],
 		"exec": "node -r tsconfig-paths/register -r ts-node/register ./src/main/bootstrap.ts",
 		"ext": "ts, js"
 	},
@@ -45,6 +52,7 @@
 	"dependencies": {
 		"@prisma/client": "^5.8.1",
 		"cors": "^2.8.5",
+		"currency.js": "^2.0.4",
 		"dotenv": "^16.4.1",
 		"express": "^4.18.2",
 		"npm-check": "^6.0.1",

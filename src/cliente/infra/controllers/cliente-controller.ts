@@ -1,12 +1,13 @@
 import { ClienteUsecasesFactoryInterface } from "@/cliente/application/contracts";
-import { Log, Validator } from "@/shared/contracts";
-import { RestInput, RestOutput } from "@/shared/contracts/controller";
 import {
 	BuscarClientePorCpfDTO,
 	CadastrarClienteDTO,
 	buscarClientePorCpfSchema,
 	cadastrarClienteSchema
-} from "@/shared/infra/adapters/zod";
+} from "@/cliente/infra/schemas";
+import { Log, Validator } from "@/shared/contracts";
+import { RestInput, RestOutput } from "@/shared/contracts/controller";
+
 import { RestPresenter } from "@/shared/infra/presenters";
 export class RestClienteController {
 	constructor(
