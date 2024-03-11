@@ -1,4 +1,4 @@
-import { Email } from "@/1-domain/value-objects";
+import { Email } from "@/cliente/domain/value-objects";
 
 describe("Email value object", () => {
 	test("Deve criar um Email", () => {

@@ -18,16 +18,9 @@
 	"author": "",
 	"license": "ISC",
 	"nodemonConfig": {
-		"ignore": [
-			"**/*.test.ts",
-			"**/*.spec.ts",
-			".git",
-			"node_modules"
-		],
-		"watch": [
-			"src"
-		],
-		"exec": "node -r tsconfig-paths/register -r ts-node/register ./src/4-main/bootstrap.ts",
+		"ignore": ["**/*.test.ts", "**/*.spec.ts", ".git", "node_modules"],
+		"watch": ["src"],
+		"exec": "node -r tsconfig-paths/register -r ts-node/register ./src/main/bootstrap.ts",
 		"ext": "ts, js"
 	},
 	"devDependencies": {

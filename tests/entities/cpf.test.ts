@@ -1,4 +1,4 @@
-import { CPF } from "@/1-domain/value-objects/cpf";
+import { CPF } from "@/cliente/domain/value-objects/cpf";
 
 describe("CPF value object", () => {
 	test("Deve criar um CPF", () => {

@@ -1,4 +1,4 @@
-import { Cliente } from "@/1-domain/entities";
+import { Cliente } from "@/cliente/domain/entities";
 
 const makeNomeWith256Characters = () => {
 	let nome = "";

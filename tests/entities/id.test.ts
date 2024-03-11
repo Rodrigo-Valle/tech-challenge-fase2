@@ -1,4 +1,4 @@
-import { Id } from "@/1-domain/value-objects";
+import { Id } from "@/cliente/domain/value-objects";
 
 jest.mock("crypto", () => ({
 	randomUUID: () => "random-uuid"
