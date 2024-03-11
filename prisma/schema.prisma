@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id    String @id(map: "cliente_pk") @unique
+  nome  String
+  email String
+  cpf   String @unique
+
+  @@map("cliente")
+}
+
+model Item {
+  id          String    @id(map: "item_pk") @unique
+  nome        String    @unique
+  preco       String
+  idCategoria String    @map("id_categoria")
+  categoria   Categoria @relation(fields: [idCategoria], references: [id])
+
+  @@map("item")
+}
+
+model Categoria {
+  id   String @id(map: "categoria_pk") @unique
+  nome String @unique
+  item Item[]
+
+  @@map("categoria")
+}

@@ -28,7 +28,6 @@
       "@/*": ["*"],
       "@/tests/*": ["../tests/*"]
     },
-    "rootDirs": ["src", "tests"],
     "lib": [
       "es6",
       "es7",
