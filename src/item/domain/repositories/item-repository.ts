@@ -5,4 +5,5 @@ export interface ItemRepository {
 	update(item: Item): Promise<void>;
 	findByNome(nome: string): Promise<Item | null>;
 	findById(id: string): Promise<Item | null>;
+	delete(id: string): Promise<void>;
 }

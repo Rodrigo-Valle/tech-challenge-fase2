@@ -1,5 +1,5 @@
 import { ItemUsecasesFactoryInterface } from "@/item/application/contracts";
-import { EditarItemUsecase } from "@/item/application/usecase";
+import { DeletarItemUsecase, EditarItemUsecase } from "@/item/application/usecase";
 import { CadastrarItemUsecase } from "@/item/application/usecase/cadastrar-item";
 import { PrismaCategoriaRepository, PrismaItemRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
@@ -14,6 +14,10 @@ export class ItemUsecasesFactory implements ItemUsecasesFactoryInterface {
 
 	makeEditarItemUsecase(logger: Log): EditarItemUsecase {
 		return new EditarItemUsecase(logger, this.makeItemRepository());
+	}
+
+	makeDeletarItemUsecase(logger: Log): DeletarItemUsecase {
+		return new DeletarItemUsecase(logger, this.makeItemRepository());
 	}
 
 	private makeItemRepository(): PrismaItemRepository {

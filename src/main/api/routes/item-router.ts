@@ -8,6 +8,7 @@ export class ItemRouter extends BaseRouter<RestItemController> {
 		super();
 		httpServer.on("post", "/item", (params) => this.handleRequest(params, "cadastrarItem"));
 		httpServer.on("patch", "/item/:id", (params) => this.handleRequest(params, "editarItem"));
+		httpServer.on("delete", "/item/:id", (params) => this.handleRequest(params, "deletarItem"));
 	}
 
 	static start(httpServer: HttpServer) {

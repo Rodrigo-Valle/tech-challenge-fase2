@@ -3,6 +3,14 @@ import { ItemRepository } from "@/item/domain/repositories";
 import { PrismaBaseRepository } from "@/shared/infra/prisma";
 
 export class PrismaItemRepository extends PrismaBaseRepository implements ItemRepository {
+	async delete(id: string): Promise<void> {
+		await this.client.item.delete({
+			where: {
+				id
+			}
+		});
+	}
+
 	async update(item: Item): Promise<void> {
 		const itemData = item.toPersistence();
 		await this.client.item.update({
