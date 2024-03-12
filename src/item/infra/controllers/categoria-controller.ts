@@ -1,8 +1,8 @@
 import { CategoriaUsecasesFactoryInterface } from "@/item/application/contracts";
+import { CadastrarCategoriaDTO, cadastrarCategoriaSchema } from "@/item/infra/schemas/categoria";
 import { Log, Validator } from "@/shared/contracts";
 import { RestInput, RestOutput } from "@/shared/contracts/controller";
 import { RestPresenter } from "@/shared/infra/presenters";
-import { CadastrarCategoriaDTO, cadastrarCategoriaSchema } from "../schemas";
 
 export class RestCategoriaController {
 	constructor(

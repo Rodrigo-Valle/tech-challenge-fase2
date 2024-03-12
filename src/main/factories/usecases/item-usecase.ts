@@ -1,6 +1,6 @@
 import { ItemUsecasesFactoryInterface } from "@/item/application/contracts";
-import { BuscatItemPorCategoriaUsecase, DeletarItemUsecase, EditarItemUsecase } from "@/item/application/usecase";
-import { CadastrarItemUsecase } from "@/item/application/usecase/cadastrar-item";
+import { BuscatItemPorCategoriaUsecase, DeletarItemUsecase, EditarItemUsecase } from "@/item/application/usecase/item";
+import { CadastrarItemUsecase } from "@/item/application/usecase/item/cadastrar-item";
 import { PrismaCategoriaRepository, PrismaItemRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
 import { Log } from "@/shared/contracts";

@@ -1,5 +1,10 @@
 import { Log } from "@/shared/contracts";
-import { BuscatItemPorCategoriaUsecase, CadastrarItemUsecase, DeletarItemUsecase, EditarItemUsecase } from "../usecase";
+import {
+	BuscatItemPorCategoriaUsecase,
+	CadastrarItemUsecase,
+	DeletarItemUsecase,
+	EditarItemUsecase
+} from "../usecase/item";
 
 export interface ItemUsecasesFactoryInterface {
 	makeCadastrarItemUsecase: (logger: Log) => CadastrarItemUsecase;

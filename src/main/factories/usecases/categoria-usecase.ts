@@ -1,5 +1,5 @@
 import { CategoriaUsecasesFactoryInterface } from "@/item/application/contracts";
-import { CadastrarCategoriaUsecase } from "@/item/application/usecase";
+import { CadastrarCategoriaUsecase } from "@/item/application/usecase/categoria";
 import { PrismaCategoriaRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
 import { Log } from "@/shared/contracts";

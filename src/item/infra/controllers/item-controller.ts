@@ -11,7 +11,7 @@ import {
 	cadastrarItemSchema,
 	deletarItemSchema,
 	editarItemSchema
-} from "../schemas";
+} from "../schemas/item";
 
 export class RestItemController {
 	constructor(
