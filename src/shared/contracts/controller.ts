@@ -6,7 +6,7 @@ export type RestOutput = {
 };
 
 export type RestInput = {
-	body: unknown;
-	params: unknown;
-	query: unknown;
+	body: Record<string, unknown>;
+	params: Record<string, unknown>;
+	query: Record<string, unknown>;
 };

@@ -3,14 +3,14 @@ export interface HttpServer {
 	listen: (port: number) => void;
 }
 
-export type RestMethod = "get" | "post" | "put" | "delete";
+export type RestMethod = "get" | "post" | "put" | "delete" | "patch";
 
 export type CallbackFunction = (params: HttpRequest) => Promise<HttpResponse>;
 
 export interface HttpRequest {
-	params: unknown;
-	body: unknown;
-	query: unknown;
+	body: Record<string, unknown>;
+	params: Record<string, unknown>;
+	query: Record<string, unknown>;
 	requestId: string;
 }
 

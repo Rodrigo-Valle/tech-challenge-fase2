@@ -42,6 +42,11 @@ export class Item {
 		return sanitizedValue;
 	}
 
+	update(params: UpdateParams): void {
+		if (params.nome) this.nome = Item.validateNome(params.nome);
+		if (params.preco) this.preco = Preco.new(params.preco);
+	}
+
 	getId(): string {
 		return this.id.getValue();
 	}
@@ -65,22 +70,24 @@ export class Item {
 	}
 }
 
-interface ItemConstructorParams {
+type ItemConstructorParams = {
 	id: Id;
 	nome: string;
 	preco: Preco;
 	categoria: Categoria;
-}
+};
 
-interface NewItem {
+type NewItem = {
 	nome: string;
 	preco: number | string;
 	categoria: Categoria;
-}
+};
 
-interface RestoreItem {
+type RestoreItem = {
 	id: string;
 	nome: string;
 	preco: string;
 	categoria: Categoria;
-}
+};
+
+type UpdateParams = { nome?: string; preco?: number };
