@@ -3,6 +3,21 @@ import { ItemRepository } from "@/item/domain/repositories";
 import { PrismaBaseRepository } from "@/shared/infra/prisma";
 
 export class PrismaItemRepository extends PrismaBaseRepository implements ItemRepository {
+	async findByCategoria(idCategoria: string): Promise<Item[]> {
+		const result = await this.client.item.findMany({
+			where: {
+				idCategoria
+			},
+			include: {
+				categoria: true
+			}
+		});
+		return result.map((item) => {
+			const categoria = Categoria.restore(item.categoria);
+			return Item.restore({ ...item, categoria });
+		});
+	}
+
 	async delete(id: string): Promise<void> {
 		await this.client.item.delete({
 			where: {

@@ -3,9 +3,11 @@ import { Log, Validator } from "@/shared/contracts";
 import { RestInput, RestOutput } from "@/shared/contracts/controller";
 import { RestPresenter } from "@/shared/infra/presenters";
 import {
+	BuscarItemPorCategoriaDTO,
 	CadastrarItemDTO,
 	DeletarItemDTO,
 	EditarItemDTO,
+	buscarItemPorCategoriaSchema,
 	cadastrarItemSchema,
 	deletarItemSchema,
 	editarItemSchema
@@ -48,6 +50,18 @@ export class RestItemController {
 			const dto = this.validator.validate<DeletarItemDTO>(input.params, deletarItemSchema);
 			await this.usecaseFactory.makeDeletarItemUsecase(this.logger).execute(dto);
 			return RestPresenter.ok({ mensagem: `Item ${input.params.id} deletado com sucesso!` });
+		} catch (error) {
+			this.logger.error(`Erro ao deletar Item: ${error.message}, detalhes: ${error.detail}`);
+			return RestPresenter.error(error);
+		}
+	}
+
+	async buscarItemPorCategoria(input: RestInput): Promise<RestOutput> {
+		try {
+			this.logger.info(input, "Nova requisição de exclusão de cadastro de item: ");
+			const dto = this.validator.validate<BuscarItemPorCategoriaDTO>(input.params, buscarItemPorCategoriaSchema);
+			const result = await this.usecaseFactory.makeBuscarItemPorCategoriaUsecase(this.logger).execute(dto);
+			return RestPresenter.ok(result);
 		} catch (error) {
 			this.logger.error(`Erro ao deletar Item: ${error.message}, detalhes: ${error.detail}`);
 			return RestPresenter.error(error);
