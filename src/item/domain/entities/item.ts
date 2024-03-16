@@ -1,6 +1,5 @@
-import { Id } from "@/shared/domain/value-objects";
+import { Id, Preco } from "@/shared/domain/value-objects";
 import { ValidationError } from "@/shared/exception";
-import { Preco } from "../value-objects";
 import { Categoria } from "./categoria";
 
 export class Item {
@@ -49,6 +48,10 @@ export class Item {
 
 	getId(): string {
 		return this.id.getValue();
+	}
+
+	getPreco(): string {
+		return this.preco.getValue();
 	}
 
 	toJson() {

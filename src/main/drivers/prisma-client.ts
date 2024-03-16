@@ -4,13 +4,15 @@ export class PrismaConnection {
 	private static instance: PrismaConnection;
 	private readonly client: PrismaClient;
 
-	private constructor() {
-		this.client = new PrismaClient();
+	private constructor(log?: boolean) {
+		this.client = new PrismaClient({
+			log: log ? ["query", "info", "warn", "error"] : []
+		});
 	}
 
-	static getInstance(): PrismaConnection {
+	static getInstance(log?: boolean): PrismaConnection {
 		if (!PrismaConnection.instance) {
-			PrismaConnection.instance = new PrismaConnection();
+			PrismaConnection.instance = new PrismaConnection(log);
 		}
 		return PrismaConnection.instance;
 	}

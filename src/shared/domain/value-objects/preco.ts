@@ -19,7 +19,7 @@ export class Preco {
 
 	static validatePreco(preco: string | number): string {
 		const currencyPreco = currency(preco);
-		if (currencyPreco.value <= 0) throw new ValidationError(`Preço informado é inválido, preço: ${preco}`);
+		if (currencyPreco.value < 0) throw new ValidationError(`Preço informado é inválido, preço: ${preco}`);
 		return currencyPreco.format({ symbol: "" });
 	}
 }

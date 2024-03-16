@@ -5,7 +5,7 @@ import { PrismaConnection } from "./drivers/prisma-client";
 const port = Number(process.env.PORT ?? 8000);
 
 const main = async () => {
-	PrismaConnection.getInstance().connect();
+	PrismaConnection.getInstance(true).connect();
 
 	const server = new ExpressAdapter();
 	initRoutes(server);

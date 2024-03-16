@@ -1,4 +1,4 @@
-import { CadastrarCategoriaUsecase } from "@/item/application/usecase/categoria";
+import { CadastrarCategoriaUsecase } from "@/item/application/usecases/categoria";
 import { Log } from "@/shared/contracts";
 
 export interface CategoriaUsecasesFactoryInterface {

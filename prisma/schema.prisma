@@ -8,20 +8,22 @@ datasource db {
 }
 
 model Cliente {
-  id    String @id(map: "cliente_pk") @unique
-  nome  String
-  email String
-  cpf   String @unique
+  id     String   @id(map: "cliente_pk") @unique
+  nome   String   @map("nome")
+  email  String   @unique
+  cpf    String   @unique
+  Pedido Pedido[]
 
   @@map("cliente")
 }
 
 model Item {
-  id          String    @id(map: "item_pk") @unique
-  nome        String    @unique
-  preco       String
-  idCategoria String    @map("id_categoria")
-  categoria   Categoria @relation(fields: [idCategoria], references: [id])
+  id          String       @id(map: "item_pk") @unique
+  nome        String       @unique
+  preco       String       @map("preco")
+  idCategoria String       @map("id_categoria")
+  categoria   Categoria    @relation(fields: [idCategoria], references: [id])
+  ItemPedido  ItemPedido[]
 
   @@map("item")
 }
@@ -32,4 +34,29 @@ model Categoria {
   item Item[]
 
   @@map("categoria")
+}
+
+model Pedido {
+  id              String       @id(map: "pedido_pk") @unique
+  clienteId       String?      @map("cliente_id")
+  Cliente         Cliente?     @relation(fields: [clienteId], references: [id])
+  valorTotal      String       @map("valor_total")
+  items           ItemPedido[]
+  dataCriacao     DateTime     @map("data_criacao")
+  statusPagamento String       @map("status_pagamento")
+  statusPedido    String       @map("status_pedido")
+
+  @@map("pedido")
+}
+
+model ItemPedido {
+  id         String @id(map: "item_pedido_pk") @unique
+  pedidoId   String @map("pedido_id")
+  itemId     String @map("item_id")
+  quantidade Int    @map("quantidade")
+  valorTotal String @map("valor_total")
+  Pedido     Pedido @relation(fields: [pedidoId], references: [id])
+  Item       Item   @relation(fields: [itemId], references: [id])
+
+  @@map("item_pedido")
 }

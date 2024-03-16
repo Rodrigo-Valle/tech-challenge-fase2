@@ -8,3 +8,7 @@ export interface ItemRepository {
 	findByCategoria(idCategoria: string): Promise<Item[]>;
 	delete(id: string): Promise<void>;
 }
+
+export type FindParams = {
+	includeCategories: boolean;
+};

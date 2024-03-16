@@ -3,6 +3,7 @@ import { z } from "zod";
 type ValidateNumberType = {
 	fieldName: string;
 	mustBePositive: boolean;
+	min?: number;
 };
 
 export const validateNumberField = (input: ValidateNumberType): z.ZodNumber => {
@@ -12,6 +13,9 @@ export const validateNumberField = (input: ValidateNumberType): z.ZodNumber => {
 	});
 	if (input.mustBePositive === true) {
 		obj = obj.positive({ message: `${input.fieldName} deve ser um valor positivo` });
+	}
+	if (input.min) {
+		obj = obj.min(input.min, { message: `${input.fieldName} deve ser no minimo ${input.min}` });
 	}
 	return obj;
 };

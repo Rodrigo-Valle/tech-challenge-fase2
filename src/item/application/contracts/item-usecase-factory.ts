@@ -4,7 +4,7 @@ import {
 	CadastrarItemUsecase,
 	DeletarItemUsecase,
 	EditarItemUsecase
-} from "../usecase/item";
+} from "../usecases/item";
 
 export interface ItemUsecasesFactoryInterface {
 	makeCadastrarItemUsecase: (logger: Log) => CadastrarItemUsecase;
