@@ -1,4 +1,4 @@
-import { CallbackFunction, HttpServer, RestMethod } from "@/shared/contracts";
+import { CallbackFunction, HttpServer, RestMethod } from "@/shared/application/contracts";
 import cors from "cors";
 import express, { type Request, type Response, type Express } from "express";
 import { generateRequestId } from "./generate-request-id";

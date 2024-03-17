@@ -1,6 +1,6 @@
 import { Item } from "@/item/domain/entities";
 import { ItemRepository } from "@/item/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
 
 type BuscatItemPorCategoriaInput = {
 	idCategoria: string;

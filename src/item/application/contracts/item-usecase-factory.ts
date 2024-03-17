@@ -1,4 +1,4 @@
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 import {
 	BuscatItemPorCategoriaUsecase,
 	CadastrarItemUsecase,

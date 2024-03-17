@@ -21,4 +21,15 @@ export class PrismaPedidoRepository extends PrismaBaseRepository implements Pedi
 			}
 		});
 	}
+
+	async update(pedido: Pedido): Promise<void> {
+		const pedidoData = pedido.toJson();
+		await this.client.pedido.update({
+			where: { id: pedido.getId() },
+			data: {
+				...pedidoData,
+				items: undefined
+			}
+		});
+	}
 }

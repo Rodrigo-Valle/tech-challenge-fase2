@@ -1,4 +1,4 @@
-import { ValidationError } from "@/shared/exception";
+import { ValidationError } from "@/shared/domain/exception";
 import currency from "currency.js";
 
 export class Preco {

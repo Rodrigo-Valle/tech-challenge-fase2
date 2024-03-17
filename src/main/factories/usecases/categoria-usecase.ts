@@ -2,7 +2,7 @@ import { CategoriaUsecasesFactoryInterface } from "@/item/application/contracts"
 import { CadastrarCategoriaUsecase } from "@/item/application/usecases/categoria";
 import { PrismaCategoriaRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 
 export class CategoriaUsecasesFactory implements CategoriaUsecasesFactoryInterface {
 	private prismaClient = PrismaConnection.getInstance().getClient();

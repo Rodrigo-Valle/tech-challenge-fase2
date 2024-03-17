@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { ExpressAdapter } from "./api/express-adapter";
 import { initRoutes } from "./api/routes/init-router";
 import { PrismaConnection } from "./drivers/prisma-client";

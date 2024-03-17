@@ -1,6 +1,6 @@
 import { RestClienteController } from "@/cliente/infra/controllers";
 import { RestControllerFactory } from "@/main/factories/controllers";
-import { HttpServer } from "@/shared/contracts";
+import { HttpServer } from "@/shared/application/contracts";
 import { BaseRouter } from "./base-router";
 
 export class ClienteRouter extends BaseRouter<RestClienteController> {

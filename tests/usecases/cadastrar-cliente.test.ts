@@ -1,7 +1,7 @@
 import { CadastrarClienteUsecase } from "@/cliente/application/usecases";
 import { Cliente } from "@/cliente/domain/entities";
 import { ClienteRepository } from "@/cliente/domain/repositories";
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 import { MockProxy, mock } from "jest-mock-extended";
 
 const invalidInput = {

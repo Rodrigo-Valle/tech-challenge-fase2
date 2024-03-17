@@ -1,8 +1,8 @@
 import { ItemRepository } from "@/item/domain/repositories";
 import { Pedido } from "@/pedido/domain/entities/pedido";
 import { PedidoRepository } from "@/pedido/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
-import { NotFoundError } from "@/shared/exception";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
+import { NotFoundError } from "@/shared/domain/exception";
 
 type CriarPedidoInput = {
 	clienteId: string | null;

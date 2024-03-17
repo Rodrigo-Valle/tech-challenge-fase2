@@ -1,7 +1,7 @@
 import { Categoria } from "@/item/domain/entities";
 import { CategoriaRepository } from "@/item/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
-import { AlreadyExistsError } from "@/shared/exception";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
+import { AlreadyExistsError } from "@/shared/domain/exception";
 
 type CadastrarCategoriaInput = {
 	nome: string;

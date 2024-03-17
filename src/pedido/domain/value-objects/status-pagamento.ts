@@ -21,5 +21,6 @@ export class StatusPagamento {
 enum StatusPagamentoEnum {
 	PENDENTE = "Pendente",
 	APROVADO = "Aprovado",
-	REJEITADO = "Rejeitado"
+	REJEITADO = "Rejeitado",
+	CANCELADO = "Cancelado"
 }

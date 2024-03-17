@@ -1,7 +1,7 @@
 import { Cliente } from "@/cliente/domain/entities/cliente";
 import { ClienteRepository } from "@/cliente/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
-import { AlreadyExistsError } from "@/shared/exception";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
+import { AlreadyExistsError } from "@/shared/domain/exception";
 
 type CadastrarClienteInput = {
 	nome: string;

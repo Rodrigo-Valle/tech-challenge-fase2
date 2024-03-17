@@ -1,5 +1,5 @@
-import { Validator } from "@/shared/contracts";
-import { ValidationError } from "@/shared/exception/validation";
+import { Validator } from "@/shared/application/contracts";
+import { ValidationError } from "@/shared/domain/exception/validation-error";
 import { ZodObject, ZodRawShape } from "zod";
 
 export class ZodValidator implements Validator {

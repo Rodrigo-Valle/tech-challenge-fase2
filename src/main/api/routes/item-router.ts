@@ -1,6 +1,6 @@
 import { RestItemController } from "@/item/infra/controllers";
 import { RestControllerFactory } from "@/main/factories/controllers";
-import { HttpServer } from "@/shared/contracts";
+import { HttpServer } from "@/shared/application/contracts";
 import { BaseRouter } from "./base-router";
 
 export class ItemRouter extends BaseRouter<RestItemController> {

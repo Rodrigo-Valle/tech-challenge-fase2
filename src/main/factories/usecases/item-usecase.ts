@@ -7,7 +7,7 @@ import {
 } from "@/item/application/usecases/item";
 import { PrismaCategoriaRepository, PrismaItemRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 
 export class ItemUsecasesFactory implements ItemUsecasesFactoryInterface {
 	private prismaClient = PrismaConnection.getInstance().getClient();

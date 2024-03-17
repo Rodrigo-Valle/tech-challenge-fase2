@@ -1,5 +1,5 @@
+import { ValidationError } from "@/shared/domain/exception";
 import { Id, Preco } from "@/shared/domain/value-objects";
-import { ValidationError } from "@/shared/exception";
 import { Categoria } from "./categoria";
 
 export class Item {

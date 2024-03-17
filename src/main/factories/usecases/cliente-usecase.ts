@@ -2,7 +2,7 @@ import { ClienteUsecasesFactoryInterface } from "@/cliente/application/contracts
 import { BuscarClientePorCPFUsecase, CadastrarClienteUsecase } from "@/cliente/application/usecases";
 import { PrismaClienteRepository } from "@/cliente/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 
 export class ClienteUsecasesFactory implements ClienteUsecasesFactoryInterface {
 	private prismaClient = PrismaConnection.getInstance().getClient();

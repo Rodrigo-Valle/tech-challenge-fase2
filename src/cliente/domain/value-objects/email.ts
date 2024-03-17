@@ -1,4 +1,4 @@
-import { ValidationError } from "@/shared/exception";
+import { ValidationError } from "@/shared/domain/exception";
 
 export class Email {
 	private readonly value: string;

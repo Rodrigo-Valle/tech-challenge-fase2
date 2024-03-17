@@ -1,7 +1,7 @@
 import { Item } from "@/item/domain/entities";
 import { ItemRepository } from "@/item/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
-import { NotFoundError } from "@/shared/exception";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
+import { NotFoundError } from "@/shared/domain/exception";
 
 type EditarItemInput = {
 	id: string;

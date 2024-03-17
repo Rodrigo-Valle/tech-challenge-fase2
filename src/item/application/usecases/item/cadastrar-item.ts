@@ -1,7 +1,7 @@
 import { Item } from "@/item/domain/entities";
 import { CategoriaRepository, ItemRepository } from "@/item/domain/repositories";
-import { BaseUsecase, Log, Usecase } from "@/shared/contracts";
-import { AlreadyExistsError, NotFoundError } from "@/shared/exception";
+import { BaseUsecase, Log, Usecase } from "@/shared/application/contracts";
+import { AlreadyExistsError, NotFoundError } from "@/shared/domain/exception";
 
 type CadastrarItemInput = {
 	nome: string;

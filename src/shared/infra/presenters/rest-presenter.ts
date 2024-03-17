@@ -1,4 +1,4 @@
-import { RestOutput } from "@/shared/contracts";
+import { RestOutput } from "@/shared/application/contracts";
 import { RestErrorHandler } from "@/shared/infra/presenters";
 
 export class RestPresenter {

@@ -1,4 +1,4 @@
-import { Level, Log } from "@/shared/contracts";
+import { Level, Log } from "@/shared/application/contracts";
 import pino from "pino";
 import pretty from "pino-pretty";
 

@@ -22,5 +22,6 @@ enum StatusPedidoEnum {
 	RECEBIDO = "Recebido",
 	EM_PREPARO = "Em preparo",
 	PRONTO = "Pronto",
-	FINALIZADO = "Finalizado"
+	FINALIZADO = "Finalizado",
+	CANCELADO = "Cancelado"
 }

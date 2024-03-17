@@ -1,6 +1,6 @@
 import { RestCategoriaController } from "@/item/infra/controllers/categoria-controller";
 import { RestControllerFactory } from "@/main/factories/controllers";
-import { HttpServer } from "@/shared/contracts";
+import { HttpServer } from "@/shared/application/contracts";
 import { BaseRouter } from "./base-router";
 
 export class CategoriaRouter extends BaseRouter<RestCategoriaController> {

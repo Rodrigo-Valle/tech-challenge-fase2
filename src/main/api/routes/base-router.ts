@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, RestOutput } from "@/shared/contracts";
+import { HttpRequest, HttpResponse, RestOutput } from "@/shared/application/contracts";
 
 export abstract class BaseRouter<T extends { [K in keyof T]: (params: HttpRequest) => Promise<RestOutput> }> {
 	protected abstract makeController(requestId: string): T;

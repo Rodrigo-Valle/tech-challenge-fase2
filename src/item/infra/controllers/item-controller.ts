@@ -1,6 +1,6 @@
 import { ItemUsecasesFactoryInterface } from "@/item/application/contracts";
-import { Log, Validator } from "@/shared/contracts";
-import { RestInput, RestOutput } from "@/shared/contracts/controller";
+import { Log, Validator } from "@/shared/application/contracts";
+import { RestInput, RestOutput } from "@/shared/application/contracts/controller";
 import { RestPresenter } from "@/shared/infra/presenters";
 import {
 	BuscarItemPorCategoriaDTO,

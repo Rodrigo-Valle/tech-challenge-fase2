@@ -5,8 +5,8 @@ import {
 	buscarClientePorCpfSchema,
 	cadastrarClienteSchema
 } from "@/cliente/infra/schemas";
-import { Log, Validator } from "@/shared/contracts";
-import { RestInput, RestOutput } from "@/shared/contracts/controller";
+import { Log, Validator } from "@/shared/application/contracts";
+import { RestInput, RestOutput } from "@/shared/application/contracts/controller";
 
 import { RestPresenter } from "@/shared/infra/presenters";
 export class RestClienteController {

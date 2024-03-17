@@ -1,4 +1,4 @@
-import { Log } from "@/shared/contracts";
+import { Log } from "@/shared/application/contracts";
 
 export interface Usecase<I, O> {
 	execute(input: I): O | Promise<O>;

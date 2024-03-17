@@ -1,5 +1,5 @@
+import { ValidationError } from "@/shared/domain/exception";
 import { Id } from "@/shared/domain/value-objects";
-import { ValidationError } from "@/shared/exception";
 import { CPF, Email } from "../value-objects";
 
 export class Cliente {
