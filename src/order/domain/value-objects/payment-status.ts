@@ -13,7 +13,7 @@ export class PaymentStatus {
 	}
 
 	static validateStatus(status: string): void {
-		if (!(status in PaymentStatusEnum)) {
+		if (!Object.values(PaymentStatusEnum).includes(status as PaymentStatusEnum)) {
 			throw new ValidationError(`Status de pagamento inválido: ${status}`);
 		}
 	}
@@ -28,8 +28,8 @@ export class PaymentStatus {
 }
 
 export enum PaymentStatusEnum {
-	PENDENTE = "Pendente",
-	APROVADO = "Aprovado",
-	REJEITADO = "Rejeitado",
-	CANCELADO = "Cancelado"
+	PENDING = "Pendente",
+	APPROVED = "Aprovado",
+	REJECTED = "Rejeitado",
+	CANCELLED = "Cancelado"
 }

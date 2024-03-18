@@ -28,7 +28,7 @@ export class Order {
 			id: Id.new(),
 			items: [],
 			totalValue: Price.new(0),
-			paymentStatus: PaymentStatus.new(PaymentStatusEnum.PENDENTE),
+			paymentStatus: PaymentStatus.new(PaymentStatusEnum.PENDING),
 			orderStatus: OrderStatus.new(OrderStatusEnum.RECEIVED),
 			creationDate: new Date(),
 			customerId: params.customerId ? Id.restore(params.customerId) : null

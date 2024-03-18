@@ -61,7 +61,7 @@ export class ItemController {
 			this.logger.info(input, "Nova requisição de exclusão de cadastro de item: ");
 			const dto = this.validator.validate<FindByCategoryDTO>(input.params, findByCategorySchema);
 			const result = await this.usecaseFactory.makeFindByCategoryUsecase(this.logger).execute(dto);
-			return RestPresenter.ok(result);
+			return RestPresenter.ok(result.map((item) => item.toJson()));
 		} catch (error) {
 			this.logger.error(`Erro ao deletar Item: ${error.message}, detalhes: ${error.detail}`);
 			return RestPresenter.error(error);

@@ -13,7 +13,7 @@ export class OrderStatus {
 	}
 
 	static validateStatus(status: string): void {
-		if (!(status in OrderStatusEnum)) {
+		if (!Object.values(OrderStatusEnum).includes(status as OrderStatusEnum)) {
 			throw new ValidationError(`Status do pedido inválido: ${status}`);
 		}
 	}

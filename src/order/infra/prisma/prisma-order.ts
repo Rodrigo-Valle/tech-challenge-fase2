@@ -15,6 +15,7 @@ export class PrismaOrderRepository extends PrismaBaseRepository implements Order
 						data: orderData.items.map((orderItem) => ({
 							quantity: orderItem.quantity,
 							id: orderItem.id,
+							unitValue: orderItem.unitValue,
 							totalValue: orderItem.totalValue,
 							itemId: orderItem.item.id
 						}))
