@@ -1,4 +1,4 @@
-export * from "./cliente-usecase";
+export * from "./customer-usecases";
 export * from "./item-usecase";
-export * from "./categoria-usecase";
-export * from "./pedido-usecase";
+export * from "./category-usecases";
+export * from "./order-usecase";

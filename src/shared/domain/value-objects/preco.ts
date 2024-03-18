@@ -1,7 +1,7 @@
 import { ValidationError } from "@/shared/domain/exception";
 import currency from "currency.js";
 
-export class Preco {
+export class Price {
 	private readonly value: string;
 
 	private constructor(value: string) {
@@ -9,17 +9,17 @@ export class Preco {
 	}
 
 	static new(value: string | number) {
-		const validPreco = Preco.validatePreco(value);
-		return new Preco(validPreco);
+		const validPrice = Price.validatePrice(value);
+		return new Price(validPrice);
 	}
 
 	getValue() {
 		return this.value;
 	}
 
-	static validatePreco(preco: string | number): string {
-		const currencyPreco = currency(preco);
-		if (currencyPreco.value < 0) throw new ValidationError(`Preço informado é inválido, preço: ${preco}`);
-		return currencyPreco.format({ symbol: "" });
+	static validatePrice(preco: string | number): string {
+		const currencyPrice = currency(preco);
+		if (currencyPrice.value < 0) throw new ValidationError(`Preço informado é inválido, preço: ${preco}`);
+		return currencyPrice.format({ symbol: "" });
 	}
 }

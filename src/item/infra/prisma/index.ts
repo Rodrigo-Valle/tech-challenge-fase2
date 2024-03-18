@@ -1,2 +1,2 @@
-export * from "./prisma-item-repository";
-export * from "./prisma-categoria-repository";
+export * from "./prisma-item";
+export * from "./prisma-category";

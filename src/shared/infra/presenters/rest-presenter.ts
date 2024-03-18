@@ -1,8 +1,8 @@
-import { RestOutput } from "@/shared/application/contracts";
+import { Output } from "@/shared/application/contracts";
 import { RestErrorHandler } from "@/shared/infra/presenters";
 
 export class RestPresenter {
-	static readonly created = (data: unknown): RestOutput => {
+	static readonly created = (data: unknown): Output => {
 		return {
 			statusCode: 201,
 			data,
@@ -10,7 +10,7 @@ export class RestPresenter {
 		};
 	};
 
-	static readonly ok = (data: unknown): RestOutput => {
+	static readonly ok = (data: unknown): Output => {
 		return {
 			statusCode: 200,
 			data: data ?? undefined,
@@ -18,7 +18,7 @@ export class RestPresenter {
 		};
 	};
 
-	static readonly error = (error: unknown): RestOutput => {
+	static readonly error = (error: unknown): Output => {
 		return RestErrorHandler.handleError(error);
 	};
 }

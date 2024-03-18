@@ -1,1 +1,1 @@
-export * from "./cadastrar-categoria";
+export * from "./create-category";

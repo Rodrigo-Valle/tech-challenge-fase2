@@ -1,38 +1,38 @@
 import { ItemUsecasesFactoryInterface } from "@/item/application/contracts";
 import {
-	BuscatItemPorCategoriaUsecase,
-	CadastrarItemUsecase,
-	DeletarItemUsecase,
-	EditarItemUsecase
+	CreateItemUsecase,
+	DeleteItemUsecase,
+	EditItemUsecase,
+	FindByCategoryUsecase
 } from "@/item/application/usecases/item";
-import { PrismaCategoriaRepository, PrismaItemRepository } from "@/item/infra/prisma";
+import { PrismaCategoryRepository, PrismaItemRepository } from "@/item/infra/prisma";
 import { PrismaConnection } from "@/main/drivers";
 import { Log } from "@/shared/application/contracts";
 
 export class ItemUsecasesFactory implements ItemUsecasesFactoryInterface {
 	private prismaClient = PrismaConnection.getInstance().getClient();
 
-	makeCadastrarItemUsecase(logger: Log): CadastrarItemUsecase {
-		return new CadastrarItemUsecase(logger, this.makeItemRepository(), this.makeCategoriaRepository());
+	makeCreateItemUsecase(logger: Log): CreateItemUsecase {
+		return new CreateItemUsecase(logger, this.makeItemRepository(), this.makeCategoriaRepository());
 	}
 
-	makeEditarItemUsecase(logger: Log): EditarItemUsecase {
-		return new EditarItemUsecase(logger, this.makeItemRepository());
+	makeEditItemUsecase(logger: Log): EditItemUsecase {
+		return new EditItemUsecase(logger, this.makeItemRepository());
 	}
 
-	makeDeletarItemUsecase(logger: Log): DeletarItemUsecase {
-		return new DeletarItemUsecase(logger, this.makeItemRepository());
+	makeDeleteItemUsecase(logger: Log): DeleteItemUsecase {
+		return new DeleteItemUsecase(logger, this.makeItemRepository());
 	}
 
-	makeBuscarItemPorCategoriaUsecase(logger: Log): BuscatItemPorCategoriaUsecase {
-		return new BuscatItemPorCategoriaUsecase(logger, this.makeItemRepository());
+	makeFindByCategoryUsecase(logger: Log): FindByCategoryUsecase {
+		return new FindByCategoryUsecase(logger, this.makeItemRepository());
 	}
 
 	private makeItemRepository(): PrismaItemRepository {
 		return new PrismaItemRepository(this.prismaClient);
 	}
 
-	private makeCategoriaRepository(): PrismaCategoriaRepository {
-		return new PrismaCategoriaRepository(this.prismaClient);
+	private makeCategoriaRepository(): PrismaCategoryRepository {
+		return new PrismaCategoryRepository(this.prismaClient);
 	}
 }

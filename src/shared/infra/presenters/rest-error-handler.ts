@@ -1,4 +1,4 @@
-import { RestOutput } from "@/shared/application/contracts";
+import { Output } from "@/shared/application/contracts";
 import {
 	AlreadyExistsError,
 	BadRequestError,
@@ -9,7 +9,7 @@ import {
 import { BaseError } from "@/shared/domain/exception/base-error";
 
 export class RestErrorHandler {
-	static readonly handleError = (error: unknown): RestOutput => {
+	static readonly handleError = (error: unknown): Output => {
 		if (error instanceof BadRequestError) return this.badRequest(error);
 		if (error instanceof ValidationError) return this.badRequest(error);
 		if (error instanceof NotFoundError) return this.notFound(error);
@@ -18,7 +18,7 @@ export class RestErrorHandler {
 		return this.unexpectedError(error);
 	};
 
-	private static readonly unprocessableEntity = (error: BaseError): RestOutput => {
+	private static readonly unprocessableEntity = (error: BaseError): Output => {
 		return {
 			success: false,
 			statusCode: 422,
@@ -27,7 +27,7 @@ export class RestErrorHandler {
 		};
 	};
 
-	private static readonly badRequest = (error: BaseError): RestOutput => {
+	private static readonly badRequest = (error: BaseError): Output => {
 		return {
 			success: false,
 			statusCode: 400,
@@ -36,7 +36,7 @@ export class RestErrorHandler {
 		};
 	};
 
-	private static readonly notFound = (error: BaseError): RestOutput => {
+	private static readonly notFound = (error: BaseError): Output => {
 		return {
 			success: false,
 			statusCode: 404,
@@ -44,7 +44,7 @@ export class RestErrorHandler {
 		};
 	};
 
-	private static readonly badGateway = (error: BaseError): RestOutput => {
+	private static readonly badGateway = (error: BaseError): Output => {
 		return {
 			success: false,
 			statusCode: 502,
@@ -52,7 +52,7 @@ export class RestErrorHandler {
 		};
 	};
 
-	private static readonly unexpectedError = (error: unknown): RestOutput => {
+	private static readonly unexpectedError = (error: unknown): Output => {
 		console.error(error, "Erro inesperado no servidor");
 		return {
 			success: false,

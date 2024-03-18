@@ -1,5 +1,5 @@
 import { type HttpClient, type HttpInput, type HttpResult } from "@/shared/application/contracts";
-import { HttpError, ServerError } from "@/shared/domain/exception";
+import { HttpClientError, ServerError } from "@/shared/domain/exception";
 import axios, { AxiosError } from "axios";
 
 export class AxiosHttpClientAdapter implements HttpClient {
@@ -50,7 +50,7 @@ export class AxiosHttpClientAdapter implements HttpClient {
 
 	private treatAxiosError(error: unknown, url: string): Error {
 		if (error instanceof AxiosError) {
-			return new HttpError(error.message, error.response?.data, error.response?.status);
+			return new HttpClientError(error.message, error.response?.data, error.response?.status);
 		}
 		if (error instanceof Error) {
 			return new ServerError(`Erro ao realizar requisição para a url: ${url}`, error.message);

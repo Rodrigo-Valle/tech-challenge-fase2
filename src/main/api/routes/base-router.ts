@@ -1,6 +1,6 @@
-import { HttpRequest, HttpResponse, RestOutput } from "@/shared/application/contracts";
+import { HttpRequest, HttpResponse, Output } from "@/shared/application/contracts";
 
-export abstract class BaseRouter<T extends { [K in keyof T]: (params: HttpRequest) => Promise<RestOutput> }> {
+export abstract class BaseRouter<T extends { [K in keyof T]: (params: HttpRequest) => Promise<Output> }> {
 	protected abstract makeController(requestId: string): T;
 
 	protected async handleRequest(params: HttpRequest, methodName: keyof T): Promise<HttpResponse> {
@@ -9,7 +9,7 @@ export abstract class BaseRouter<T extends { [K in keyof T]: (params: HttpReques
 		return this.buildResponse(result);
 	}
 
-	protected buildResponse(result: RestOutput): HttpResponse {
+	protected buildResponse(result: Output): HttpResponse {
 		return {
 			statusCode: result.statusCode,
 			body: {

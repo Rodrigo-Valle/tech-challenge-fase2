@@ -7,56 +7,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Cliente {
-  id     String   @id(map: "cliente_pk") @unique
-  nome   String   @map("nome")
-  email  String   @unique
-  cpf    String   @unique
-  Pedido Pedido[]
+model Customer {
+  id    String  @id(map: "customer_pk") @unique
+  name  String  @map("name")
+  email String  @unique @map("email")
+  cpf   String  @unique @map("cpf")
+  order Order[]
 
-  @@map("cliente")
+  @@map("customer")
 }
 
 model Item {
-  id          String       @id(map: "item_pk") @unique
-  nome        String       @unique
-  preco       String       @map("preco")
-  idCategoria String       @map("id_categoria")
-  categoria   Categoria    @relation(fields: [idCategoria], references: [id])
-  ItemPedido  ItemPedido[]
+  id         String      @id(map: "item_pk") @unique
+  name       String      @unique
+  price      String      @map("price")
+  categoryId String      @map("category_id")
+  category   Category    @relation(fields: [categoryId], references: [id])
+  orderItem  OrderItem[]
 
   @@map("item")
 }
 
-model Categoria {
-  id   String @id(map: "categoria_pk") @unique
-  nome String @unique
+model Category {
+  id   String @id(map: "category_pk") @unique
+  name String @unique @map("name")
   item Item[]
 
-  @@map("categoria")
+  @@map("category")
 }
 
-model Pedido {
-  id              String       @id(map: "pedido_pk") @unique
-  clienteId       String?      @map("cliente_id")
-  Cliente         Cliente?     @relation(fields: [clienteId], references: [id])
-  valorTotal      String       @map("valor_total")
-  items           ItemPedido[]
-  dataCriacao     DateTime     @map("data_criacao")
-  statusPagamento String       @map("status_pagamento")
-  statusPedido    String       @map("status_pedido")
+model Order {
+  id            String      @id(map: "pedido_pk") @unique
+  customerId    String?     @map("customer_id")
+  Customer      Customer?   @relation(fields: [customerId], references: [id])
+  totalValue    String      @map("total_value")
+  items         OrderItem[]
+  creationDate  DateTime    @map("creation_date")
+  paymentStatus String      @map("payment_status")
+  orderStatus   String      @map("orderStatus")
 
-  @@map("pedido")
+  @@map("order")
 }
 
-model ItemPedido {
-  id         String @id(map: "item_pedido_pk") @unique
-  pedidoId   String @map("pedido_id")
+model OrderItem {
+  id         String @id(map: "order_item_pk") @unique
+  orderId    String @map("pedido_id")
   itemId     String @map("item_id")
-  quantidade Int    @map("quantidade")
-  valorTotal String @map("valor_total")
-  Pedido     Pedido @relation(fields: [pedidoId], references: [id])
-  Item       Item   @relation(fields: [itemId], references: [id])
+  quantity   Int    @map("quantity")
+  totalValue String @map("total_value")
+  order      Order  @relation(fields: [orderId], references: [id])
+  item       Item   @relation(fields: [itemId], references: [id])
 
-  @@map("item_pedido")
+  @@map("order_item")
 }

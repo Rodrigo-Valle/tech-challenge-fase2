@@ -1,12 +1,12 @@
 import { HttpServer } from "@/shared/application/contracts";
-import { CategoriaRouter } from "./categoria-router";
-import { ClienteRouter } from "./cliente-router";
+import { CategoryRouter } from "./category-router";
+import { CustomerRouter } from "./customer-router";
 import { ItemRouter } from "./item-router";
-import { PedidoRouter } from "./pedido-router";
+import { OrderRouter } from "./order-router";
 
 export const initRoutes = (server: HttpServer): void => {
-	ClienteRouter.start(server);
+	CustomerRouter.start(server);
 	ItemRouter.start(server);
-	CategoriaRouter.start(server);
-	PedidoRouter.start(server);
+	CategoryRouter.start(server);
+	OrderRouter.start(server);
 };

@@ -1,2 +1,2 @@
 export * from "./item-usecase-factory";
-export * from "./categoria-usecase-factory";
+export * from "./category-usecase-factory";

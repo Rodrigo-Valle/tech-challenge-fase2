@@ -1,96 +1,87 @@
-import { ValidationError } from "@/shared/domain/exception";
-import { Id, Preco } from "@/shared/domain/value-objects";
-import { Categoria } from "./categoria";
+import { Id, Name, Price } from "@/shared/domain/value-objects";
+import { Category } from "./category";
 
 export class Item {
 	private id: Id;
-	private nome: string;
-	private preco: Preco;
-	private categoria: Categoria;
+	private name: Name;
+	private price: Price;
+	private category: Category;
 
 	private constructor(params: ItemConstructorParams) {
 		this.id = params.id;
-		this.nome = params.nome;
-		this.preco = params.preco;
-		this.categoria = params.categoria;
+		this.name = params.name;
+		this.price = params.price;
+		this.category = params.category;
 	}
 
 	static new(params: NewItem): Item {
-		const nomeValido = Item.validateNome(params.nome);
 		return new Item({
 			id: Id.new(),
-			nome: nomeValido,
-			preco: Preco.new(params.preco),
-			categoria: params.categoria
+			name: Name.new(params.name),
+			price: Price.new(params.price),
+			category: params.category
 		});
 	}
 
 	static restore(params: RestoreItem): Item {
 		return new Item({
 			id: Id.restore(params.id),
-			nome: params.nome,
-			preco: Preco.new(params.preco),
-			categoria: params.categoria
+			name: Name.new(params.name),
+			price: Price.new(params.price),
+			category: params.category
 		});
 	}
 
-	static validateNome(nome: string): string {
-		const sanitizedValue = nome.trim();
-		const nameHasInvalidLenght = sanitizedValue.length < 3 || sanitizedValue.length > 255;
-		if (nameHasInvalidLenght) throw new ValidationError(`Nome informado é inválido, nome: ${nome}`);
-		return sanitizedValue;
-	}
-
 	update(params: UpdateParams): void {
-		if (params.nome) this.nome = Item.validateNome(params.nome);
-		if (params.preco) this.preco = Preco.new(params.preco);
+		if (params.name) this.name = Name.new(params.name);
+		if (params.price) this.price = Price.new(params.price);
 	}
 
 	getId(): string {
 		return this.id.getValue();
 	}
 
-	getPreco(): string {
-		return this.preco.getValue();
+	getPrice(): string {
+		return this.price.getValue();
 	}
 
 	toJson() {
 		return {
 			id: this.id.getValue(),
-			nome: this.nome,
-			preco: this.preco.getValue(),
-			categoria: this.categoria.toJson()
+			name: this.name.getValue(),
+			price: this.price.getValue(),
+			category: this.category.toJson()
 		};
 	}
 
 	toPersistence() {
 		return {
 			id: this.id.getValue(),
-			nome: this.nome,
-			preco: this.preco.getValue(),
-			idCategoria: this.categoria.getId()
+			name: this.name.getValue(),
+			price: this.price.getValue(),
+			categoryId: this.category.getId()
 		};
 	}
 }
 
 type ItemConstructorParams = {
 	id: Id;
-	nome: string;
-	preco: Preco;
-	categoria: Categoria;
+	name: Name;
+	price: Price;
+	category: Category;
 };
 
 type NewItem = {
-	nome: string;
-	preco: number | string;
-	categoria: Categoria;
+	name: string;
+	price: number | string;
+	category: Category;
 };
 
 type RestoreItem = {
 	id: string;
-	nome: string;
-	preco: string;
-	categoria: Categoria;
+	name: string;
+	price: string;
+	category: Category;
 };
 
-type UpdateParams = { nome?: string; preco?: number };
+type UpdateParams = { name?: string; price?: number };
