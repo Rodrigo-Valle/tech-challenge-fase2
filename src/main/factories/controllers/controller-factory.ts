@@ -1,6 +1,6 @@
 import { CustomerController } from "@/customer/infra/controllers";
 import { CategoryController, ItemController } from "@/item/infra/controllers";
-import { OrderController } from "@/order/infra/controllers";
+import { MercadoPagoWebHookController, OrderController } from "@/order/infra/controllers";
 import { PinoLogAdapter } from "@/shared/infra/adapters/pino";
 import { ZodValidatorAdapter } from "@/shared/infra/adapters/zod";
 import {
@@ -37,5 +37,12 @@ export class RestControllerFactory {
 		const orderUsecaseFactory = new OrderUsecasesFactory();
 		const zodValidator = new ZodValidatorAdapter();
 		return new OrderController(logger, orderUsecaseFactory, zodValidator);
+	}
+
+	static makeMercadoPagoWebHookController(requestId: string): MercadoPagoWebHookController {
+		const logger = new PinoLogAdapter(requestId);
+		const orderUsecaseFactory = new OrderUsecasesFactory();
+		const zodValidator = new ZodValidatorAdapter();
+		return new MercadoPagoWebHookController(logger, orderUsecaseFactory, zodValidator);
 	}
 }

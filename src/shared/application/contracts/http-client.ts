@@ -9,7 +9,7 @@ export interface HttpClient {
 export interface HttpInput<I> {
 	url: string;
 	params?: Record<string, unknown>;
-	body: I;
+	body?: I;
 }
 
 export interface HttpResult<O> {

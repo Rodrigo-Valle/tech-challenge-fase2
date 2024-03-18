@@ -18,6 +18,14 @@ export class PaymentStatus {
 		}
 	}
 
+	isApproved(): boolean {
+		return this.value === PaymentStatusEnum.APPROVED;
+	}
+
+	isCancelled(): boolean {
+		return this.value === PaymentStatusEnum.CANCELLED;
+	}
+
 	getValue(): string {
 		return this.value;
 	}

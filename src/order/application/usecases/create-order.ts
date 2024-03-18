@@ -24,7 +24,7 @@ export class CreateOrderUsecase extends BaseUsecase implements Usecase<CreateOrd
 	}
 
 	async execute(input: CreateOrderInput): Promise<CreateOrderOutput> {
-		this.logger.info({ input }, "Novo order recebido");
+		this.logger.info({ input }, "Novo pedido recebido");
 		const order = Order.new({ customerId: input.customerId });
 		for (const item of input.items) {
 			const itemFound = await this.itemRepository.findById(item.id);
@@ -33,7 +33,7 @@ export class CreateOrderUsecase extends BaseUsecase implements Usecase<CreateOrd
 		}
 		order.calculateTotalValue();
 		await this.orderRepository.save(order);
-		this.logger.info({ order }, "Pedido cadastrado com sucesso");
+		this.logger.info({ order }, "Pedido criado com sucesso");
 		return order;
 	}
 }

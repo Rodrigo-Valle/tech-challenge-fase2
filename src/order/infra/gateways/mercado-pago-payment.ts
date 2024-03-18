@@ -3,15 +3,18 @@ import { Order } from "@/order/domain/entities/order";
 import { HttpClient } from "@/shared/application/contracts";
 
 export class MercadoPagoPaymentGateway implements PaymentGateway {
-	private readonly baseUrl =
-		`https://api.mercadopago.com/instore/orders/qr/seller/collectors/${process.env.ID_LOJA}/pos/${process.env.ID_POS}/qrs`;
+	private readonly baseUrl = "https://api.mercadopago.com/";
+	private readonly generateQrCodeUrl =
+		`instore/orders/qr/seller/collectors/${process.env.USER_ID}/pos/${process.env.ID_POS}/qrs`;
+	private readonly getPaymentDataUrl = "v1/payments";
 
 	constructor(private readonly httpClient: HttpClient) {}
 
 	async generateQrCode(pedido: Order): Promise<string> {
+		const input = this.mapPedidoToMercadoPagoInput(pedido);
 		const result = await this.httpClient.post<MercadoPagoOrderInput, MercadoPagoOrderOutput>({
-			url: this.baseUrl,
-			body: this.mapPedidoToMercadoPagoInput(pedido),
+			url: `${this.baseUrl}${this.generateQrCodeUrl}`,
+			body: input,
 			params: {
 				headers: {
 					Authorization: `Bearer ${process.env.MERCADO_PAGO_ACCESS_TOKEN}`
@@ -19,6 +22,36 @@ export class MercadoPagoPaymentGateway implements PaymentGateway {
 			}
 		});
 		return result.data.qr_data;
+	}
+
+	async getPaymentData(paymentId: string): Promise<{ paymentStatus: string; orderId: string }> {
+		const result = await this.httpClient.get<MercadoPagoPaymentOutput>({
+			url: `${this.baseUrl}${this.getPaymentDataUrl}/${paymentId}`,
+			params: {
+				headers: {
+					Authorization: `Bearer ${process.env.MERCADO_PAGO_ACCESS_TOKEN}`
+				}
+			}
+		});
+		return {
+			paymentStatus: this.mapStatusReturned(result.data.status),
+			orderId: result.data.external_reference
+		};
+	}
+
+	private mapStatusReturned(externalReference: MercadoPagoStatus): string {
+		switch (externalReference) {
+			case "approved":
+				return "Aprovado";
+			case "rejected":
+				return "Rejeitado";
+			case "pending":
+				return "Pendente";
+			case "cancelled":
+				return "Cancelado";
+			default:
+				throw new Error("Status inválido");
+		}
 	}
 
 	private mapPedidoToMercadoPagoInput(order: Order): MercadoPagoOrderInput {
@@ -67,3 +100,10 @@ type MercadoPagoOrderOutput = {
 	in_store_order_id: string;
 	qr_data: string;
 };
+
+type MercadoPagoPaymentOutput = {
+	external_reference: string;
+	status: MercadoPagoStatus;
+};
+
+type MercadoPagoStatus = "approved" | "rejected" | "pending" | "cancelled";

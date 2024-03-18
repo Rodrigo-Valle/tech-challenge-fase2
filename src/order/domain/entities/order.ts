@@ -63,6 +63,16 @@ export class Order {
 
 	setPaymentStatus(paymentStatus: string) {
 		this.paymentStatus = PaymentStatus.new(paymentStatus);
+		this.setOrderStatusByPaymentStatus();
+	}
+
+	setOrderStatusByPaymentStatus() {
+		if (this.paymentStatus.isApproved()) {
+			this.orderStatus = OrderStatus.new(OrderStatusEnum.IN_PREPARATION);
+		}
+		if (this.paymentStatus.isCancelled()) {
+			this.orderStatus = OrderStatus.new(OrderStatusEnum.CANCELLED);
+		}
 	}
 
 	toJson() {

@@ -10,7 +10,7 @@ export class RestPresenter {
 		};
 	};
 
-	static readonly ok = (data: unknown): Output => {
+	static readonly ok = (data?: unknown): Output => {
 		return {
 			statusCode: 200,
 			data: data ?? undefined,
