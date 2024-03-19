@@ -75,6 +75,14 @@ export class Order {
 		}
 	}
 
+	getOrderStatus(): OrderStatus {
+		return this.orderStatus;
+	}
+
+	getCreationDate(): Date {
+		return this.creationDate;
+	}
+
 	toJson() {
 		return {
 			id: this.id.getValue(),

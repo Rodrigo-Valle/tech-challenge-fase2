@@ -33,4 +33,15 @@ export class OrderController {
 			return RestPresenter.error(error);
 		}
 	}
+
+	async GetOrderOrderedByStatus(input: Input): Promise<Output> {
+		try {
+			this.logger.info(input, "Nova requisição de busca de pedidos ordenados por status: ");
+			const result = await this.usecaseFactory.makeGetOrderOrderedByStatusUsecase(this.logger).execute();
+			return RestPresenter.created(result.map((order) => order.toJson()));
+		} catch (error) {
+			this.logger.error(`Erro na busca dos pedidos: ${error.message}, detalhes: ${error.detail}`);
+			return RestPresenter.error(error);
+		}
+	}
 }

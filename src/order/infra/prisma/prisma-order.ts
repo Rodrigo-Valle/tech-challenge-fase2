@@ -2,6 +2,7 @@ import { Category, Item } from "@/item/domain/entities";
 import { OrderItem } from "@/order/domain/entities";
 import { Order } from "@/order/domain/entities/order";
 import { OrderRepository } from "@/order/domain/repositories";
+import { OrderStatusEnum } from "@/order/domain/value-objects";
 import { PrismaBaseRepository } from "@/shared/infra/prisma";
 
 export class PrismaOrderRepository extends PrismaBaseRepository implements OrderRepository {
@@ -52,5 +53,28 @@ export class PrismaOrderRepository extends PrismaBaseRepository implements Order
 			return OrderItem.restore({ ...orderItem, item });
 		});
 		return Order.restore({ ...orderData, items: itemsData });
+	}
+
+	async findOrderedByStatus(): Promise<Order[]> {
+		const orders = await this.client.order.findMany({
+			where: {
+				orderStatus: {
+					in: [OrderStatusEnum.READY, OrderStatusEnum.IN_PREPARATION, OrderStatusEnum.RECEIVED]
+				}
+			},
+			include: {
+				items: {
+					include: { item: { include: { category: true } } }
+				}
+			}
+		});
+		return orders.map((orderData) => {
+			const itemsData = orderData.items.map((orderItem) => {
+				const category = Category.restore(orderItem.item.category);
+				const item = Item.restore({ ...orderItem.item, category });
+				return OrderItem.restore({ ...orderItem, item });
+			});
+			return Order.restore({ ...orderData, items: itemsData });
+		});
 	}
 }

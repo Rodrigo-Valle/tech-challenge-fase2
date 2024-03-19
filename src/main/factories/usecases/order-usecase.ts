@@ -4,6 +4,7 @@ import { OrderUsecasesFactoryInterface } from "@/order/application/contracts";
 import {
 	CreateOrderUsecase,
 	GenerateQrCodeUsecaseDecorator,
+	GetOrderOrderedByStatusUsecase,
 	GetPaymentDataUsecaseDecorator,
 	UpdateOrderPaymentStatusUsecase
 } from "@/order/application/usecases";
@@ -21,6 +22,10 @@ export class OrderUsecasesFactory implements OrderUsecasesFactoryInterface {
 
 	makeUpdateOrderPaymentStatusUsecase(logger: Log): UpdateOrderPaymentStatusUsecase {
 		return new UpdateOrderPaymentStatusUsecase(logger, this.makeOrderRepository());
+	}
+
+	makeGetOrderOrderedByStatusUsecase(logger: Log): GetOrderOrderedByStatusUsecase {
+		return new GetOrderOrderedByStatusUsecase(logger, this.makeOrderRepository());
 	}
 
 	makeUpdateOrderPaymentStatusFromMercadoPagoUsecase(logger: Log): GetPaymentDataUsecaseDecorator {
